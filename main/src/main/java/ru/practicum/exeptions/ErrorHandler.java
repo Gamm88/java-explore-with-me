@@ -17,7 +17,7 @@ public class ErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleNotFoundException(final NotFoundException e) {
-        log.info("NOT_FOUND исключение - " + e.getMessage()+ "!");
+        log.info("NOT_FOUND исключение - " + e.getMessage() + "!");
 
         return new ErrorResponse(e.getMessage());
     }
@@ -26,7 +26,7 @@ public class ErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponse handleDuplicateException(final DuplicateException e) {
-        log.info("CONFLICT исключение - " + e.getMessage()+ "!");
+        log.info("CONFLICT исключение - " + e.getMessage() + "!");
 
         return new ErrorResponse(e.getMessage());
     }
@@ -35,7 +35,7 @@ public class ErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleValidatorException(final ValidatorExceptions e) {
-        log.info("BAD_REQUEST исключение - " + e.getMessage()+ "!");
+        log.info("BAD_REQUEST исключение - " + e.getMessage() + "!");
 
         return new ErrorResponse(e.getMessage());
     }
@@ -44,7 +44,7 @@ public class ErrorHandler {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleMissingParams(MissingServletRequestParameterException e) {
-        log.info("BAD_REQUEST исключение - в запросе не указан параметр: " + e.getParameterName()+ "!");
+        log.info("BAD_REQUEST исключение - в запросе не указан параметр: " + e.getParameterName() + "!");
 
         return new ErrorResponse("В запросе не указан параметр: " + e.getParameterName() + "!");
     }

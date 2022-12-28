@@ -22,7 +22,6 @@ public interface RequestService {
     /**
      * Методы сервиса событий
      */
-    
     // Получение всех запросов по ИД события
     List<RequestDto> getAllRequestsByEventId(Long eventId);
 

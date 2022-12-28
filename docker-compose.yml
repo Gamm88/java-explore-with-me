@@ -23,8 +23,8 @@ services:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
 
-  stats-service:
-    container_name: stats_service_container
+  stats-server:
+    container_name: stats_server_container
     build: stats/
     ports:
       - "9090:9090"
