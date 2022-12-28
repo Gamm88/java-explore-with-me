@@ -9,10 +9,13 @@ import java.util.List;
 public interface RequestService {
     // Добавление запроса пользователя на участие в мероприятии
     RequestDto addRequest(Long userId, Long eventId);
+
     // Получение информации о заявках пользователя на участие в мероприятиях
     List<RequestDto> getRequests(Long userId);
+
     // Отмена запроса пользователя на участие в мероприятии
     RequestDto canceledRequest(Long userId, Long requestId);
+
     // Получение запроса, если не найден - ошибка 404
     Request getRequestOrNotFound(Long requestId);
 
