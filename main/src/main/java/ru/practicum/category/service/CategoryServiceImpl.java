@@ -8,6 +8,7 @@ import ru.practicum.category.CategoryRepository;
 import ru.practicum.category.model.CategoryMapper;
 import org.springframework.stereotype.Service;
 import ru.practicum.category.model.NewCategoryDto;
+import ru.practicum.exeptions.DuplicateException;
 import ru.practicum.exeptions.NotFoundException;
 import org.springframework.data.domain.PageRequest;
 
@@ -23,7 +24,7 @@ public class CategoryServiceImpl implements CategoryService {
     // создать категории
     @Override
     public CategoryDto addCategory(NewCategoryDto categoryDto) {
-        //checkCategoryNameUnique(categoryDto.getName());
+        checkCategoryNameUnique(categoryDto.getName());
         Category createdCategory = categoryRepository.save(CategoryMapper.mapToCategory(categoryDto));
         log.info("CategoryService - в базу добавлен категория: {} ", createdCategory);
 
@@ -62,7 +63,7 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryDto updateCategory(Long categoryId, CategoryDto categoryDto) {
         Category updatedCategory = getCategoryOrNotFound(categoryId);
         String newName = categoryDto.getName();
-        //checkCategoryNameUnique(newName);
+        checkCategoryNameUnique(newName);
 
         updatedCategory.setName(newName);
         updatedCategory = categoryRepository.save(updatedCategory);
@@ -87,12 +88,10 @@ public class CategoryServiceImpl implements CategoryService {
                 .orElseThrow(() -> new NotFoundException("Категория с ИД " + categoryId + " не найдена."));
     }
 
-    /*
     // Проверка на дублирование по названию категории.
     public void checkCategoryNameUnique(String categoryName) {
         if (categoryRepository.findByName(categoryName) != null) {
             throw new DuplicateException("Категория - " + categoryName + ", уже существует!");
         }
     }
-    */
 }

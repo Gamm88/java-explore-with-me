@@ -49,14 +49,6 @@ public class ErrorHandler {
         return new ErrorResponse("В запросе не указан параметр: " + e.getParameterName() + "!");
     }
 
-    // Перехват ошибки уникальности значений при записи в базу данных
-    @ExceptionHandler(JdbcSQLIntegrityConstraintViolationException.class)
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public ErrorResponse handleSQLDuplicateException() {
-
-        return new ErrorResponse("Значение уже используется!");
-    }
-
     @Data
     static class ErrorResponse {
         private final String status;
