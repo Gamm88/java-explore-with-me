@@ -67,3 +67,14 @@ CREATE TABLE IF NOT EXISTS compilations_events
     CONSTRAINT fk_compilations_events_compilation FOREIGN KEY (compilation_id) REFERENCES compilations (id) ON UPDATE CASCADE,
     CONSTRAINT fk_compilations_events_event FOREIGN KEY (event_id) REFERENCES events (id) ON UPDATE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS comments
+(
+    id       BIGINT,
+    text     BIGINT,
+    user_id  BIGINT,
+    event_id BIGINT,
+    CONSTRAINT pk_comments PRIMARY KEY (id),
+    CONSTRAINT fk_comments_event FOREIGN KEY (event_id) REFERENCES events (id),
+    CONSTRAINT fk_comments_user FOREIGN KEY (user_id) REFERENCES users (id)
+);

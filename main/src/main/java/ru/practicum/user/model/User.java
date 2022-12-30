@@ -4,9 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 
-/**
- * Модель пользователя хранящаяся в БД
- */
 @Entity
 @Getter
 @Setter

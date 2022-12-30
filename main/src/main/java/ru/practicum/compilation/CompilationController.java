@@ -15,7 +15,6 @@ import javax.validation.constraints.PositiveOrZero;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping
 public class CompilationController {
     private final CompilationService compilationService;
 

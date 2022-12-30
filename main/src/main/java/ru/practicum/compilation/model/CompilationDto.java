@@ -5,9 +5,6 @@ import ru.practicum.event.model.event.EventShortDto;
 
 import java.util.List;
 
-/**
- * Модель предоставляемой пользователю подборки.
- */
 @Data
 @Builder
 @NoArgsConstructor

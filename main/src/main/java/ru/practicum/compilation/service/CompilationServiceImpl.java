@@ -30,7 +30,7 @@ public class CompilationServiceImpl implements CompilationService {
     public List<CompilationDto> getAllCompilations(boolean pinned, int from, int size) {
         PageRequest pageRequest = PageRequest.of(from / size, size);
         List<Compilation> compilations = compilationRepository.findAllByPinnedIs(pinned, pageRequest);
-        log.info("CompilationService - предоставлены подборки {}.", compilations);
+        log.info("CompilationService - предоставлены подборки: {}.", compilations);
 
         return compilationMapper.mapToCompilationDto(compilations);
     }
@@ -39,7 +39,7 @@ public class CompilationServiceImpl implements CompilationService {
     @Override
     public CompilationDto getCompilationById(Long compId) {
         Compilation compilation = getCompilationOrNotFound(compId);
-        log.info("CompilationService - предоставлена подборка {}.", compilation);
+        log.info("CompilationService - предоставлена подборка: {}.", compilation);
 
         return compilationMapper.mapToCompilationDto(compilation);
     }
@@ -55,7 +55,7 @@ public class CompilationServiceImpl implements CompilationService {
         compilation.getEvents().replaceAll(event -> eventService.getEventOrNotFound(event.getId()));
         compilationRepository.save(compilation);
 
-        log.info("CompilationService - добавлена подборка {}.", compilation);
+        log.info("CompilationService - добавлена подборка: {}.", compilation);
 
         return compilationMapper.mapToCompilationDto(compilation);
     }
