@@ -15,7 +15,7 @@ public class HttpClient {
     private final RestTemplate restTemplate;
     private final DateUtility dateUtility;
 
-    public HttpClient(@Value("http://localhost:9090") String url,
+    public HttpClient(@Value("${ewm-stat.url}") String url,
                       RestTemplateBuilder template,
                       DateUtility dateUtility) {
         this.dateUtility = dateUtility;
@@ -28,7 +28,7 @@ public class HttpClient {
     // Сохранение информации о том, что на uri конкретного сервиса был отправлен запрос пользователем.
     // Название сервиса, uri и ip пользователя указаны в теле запроса.
     public void addHit(HttpServletRequest request) {
-        restTemplate.postForObject("hit", makeEndpointHit(request), String.class);
+        restTemplate.postForObject("/hit", makeEndpointHit(request), String.class);
     }
 
     // Создаём экземпляр класса EventHitDto
