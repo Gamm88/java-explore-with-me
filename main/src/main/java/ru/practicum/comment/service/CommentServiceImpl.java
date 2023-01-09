@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.practicum.comment.CommentRepository;
 import ru.practicum.comment.model.*;
-import ru.practicum.compilation.model.Compilation;
 import ru.practicum.event.model.event.Event;
 import ru.practicum.event.service.EventService;
 import ru.practicum.exeptions.NotFoundException;

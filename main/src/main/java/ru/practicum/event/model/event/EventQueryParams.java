@@ -23,7 +23,8 @@ public class EventQueryParams {
     private Long[] categories;
 
     // paid boolean - поиск только платных/бесплатных событий
-    private Boolean paid;
+    // значение по умолчанию: false
+    private Boolean paid = false;
 
     // rangeStart string - дата и время не раньше которых должно произойти событие
     private String rangeStart;
