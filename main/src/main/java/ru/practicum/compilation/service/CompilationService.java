@@ -8,7 +8,7 @@ import java.util.List;
 public interface CompilationService {
 
     /**
-     * Публичные сервисы, для всех пользователей.
+     * Публичные методы API, для всех пользователей.
      */
 
     // Получение подборок.
@@ -18,7 +18,7 @@ public interface CompilationService {
     CompilationDto getCompilationById(Long compId);
 
     /**
-     * Административные сервисы, только для администраторов.
+     * Административные методы API, только для администраторов.
      */
 
     // Добавление новой подборки.
@@ -27,10 +27,10 @@ public interface CompilationService {
     // Удаление подборки.
     void deleteCompilation(Long compId);
 
-    // Добавление события в подборку.
+    // Добавление мероприятия в подборку.
     void addEventToCompilation(Long compId, Long eventId);
 
-    // Удаление события из подборки.
+    // Удаление мероприятия из подборки.
     void deleteEventFromCompilation(Long compId, Long eventId);
 
     // Закрепить или открепить подборку на главной странице.

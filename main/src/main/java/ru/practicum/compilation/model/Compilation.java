@@ -27,7 +27,7 @@ public class Compilation {
     // Закреплена ли подборка на главной странице сайта.
     private Boolean pinned;
 
-    // Список событий входящих в подборку (уникальный).
+    // Мероприятия входящих в подборку (только уникальные).
     @ManyToMany
     @JoinTable(name = "compilations_events",
             joinColumns = @JoinColumn(name = "compilation_id"),

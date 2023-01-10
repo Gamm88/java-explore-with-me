@@ -63,24 +63,24 @@ public class CompilationController {
         return "Подборка удалена.";
     }
 
-    // Добавление события в подборку.
+    // Добавление мероприятия в подборку.
     @PatchMapping("/admin/compilations/{compId}/events/{eventId}")
     public String addEventToCompilation(@PathVariable("compId") Long compId,
                                         @PathVariable("eventId") Long eventId) {
-        log.info("CompilationController - добавление события с ИД: {}, в подборку с ИД: {}.", eventId, compId);
+        log.info("CompilationController - добавление мероприятия с ИД: {}, в подборку с ИД: {}.", eventId, compId);
         compilationService.addEventToCompilation(compId, eventId);
 
-        return "Событие добавлено.";
+        return "Мероприятие добавлено в подборку.";
     }
 
-    // Удаление события из подборки.
+    // Удаление мероприятия из подборки.
     @DeleteMapping("/admin/compilations/{compId}/events/{eventId}")
     public String deleteEventFromCompilation(@PathVariable("compId") Long compId,
                                              @PathVariable("eventId") Long eventId) {
-        log.info("CompilationController - удаление события с ИД: {}, из подборки с ИД: {}.", eventId, compId);
+        log.info("CompilationController - удаление мероприятия с ИД: {}, из подборки с ИД: {}.", eventId, compId);
         compilationService.deleteEventFromCompilation(compId, eventId);
 
-        return "Событие удалено.";
+        return "Мероприятие удалено из подборки.";
     }
 
     // Закрепить подборку на главной странице.
@@ -89,7 +89,7 @@ public class CompilationController {
         log.info("CompilationController - закрепление подборки с ИД: {} на главной странице.", compId);
         compilationService.changePinned(compId, true);
 
-        return "Подборка закреплена.";
+        return "Подборка закреплена на главной странице.";
     }
 
     // Открепить подборку на главной странице.
@@ -98,6 +98,6 @@ public class CompilationController {
         log.info("CompilationController - открепление подборки с ИД: {} на главной странице.", compId);
         compilationService.changePinned(compId, false);
 
-        return "Подборка откреплена.";
+        return "Подборка откреплена с главной страницы.";
     }
 }

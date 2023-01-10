@@ -18,11 +18,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CompilationServiceImpl implements CompilationService {
     private final EventService eventService;
-    private final CompilationMapper compilationMapper;
     private final CompilationRepository compilationRepository;
 
     /**
-     * Публичные сервисы, для всех пользователей.
+     * Публичные методы API, для всех пользователей.
      */
 
     // Получение подборок.
@@ -32,32 +31,31 @@ public class CompilationServiceImpl implements CompilationService {
         List<Compilation> compilations = compilationRepository.findAllByPinnedIs(pinned, pageRequest);
         log.info("CompilationService - предоставлены подборки: {}.", compilations);
 
-        return compilationMapper.mapToCompilationDto(compilations);
+        return CompilationMapper.mapToCompilationDto(compilations);
     }
 
-    // Получение подборки по его ИД.
+    // Получение подборки по ИД.
     @Override
     public CompilationDto getCompilationById(Long compId) {
         Compilation compilation = getCompilationOrNotFound(compId);
         log.info("CompilationService - предоставлена подборка: {}.", compilation);
 
-        return compilationMapper.mapToCompilationDto(compilation);
+        return CompilationMapper.mapToCompilationDto(compilation);
     }
 
     /**
-     * Административные сервисы, только для администраторов.
+     * Административные методы API, только для администраторов.
      */
 
     // Добавление новой подборки.
     @Override
     public CompilationDto addCompilation(CompilationNewDto compilationNewDto) {
-        Compilation compilation = compilationMapper.mapToCompilation(compilationNewDto);
+        Compilation compilation = CompilationMapper.mapToCompilation(compilationNewDto);
         compilation.getEvents().replaceAll(event -> eventService.getEventOrNotFound(event.getId()));
         compilationRepository.save(compilation);
-
         log.info("CompilationService - добавлена подборка: {}.", compilation);
 
-        return compilationMapper.mapToCompilationDto(compilation);
+        return CompilationMapper.mapToCompilationDto(compilation);
     }
 
     // Удаление подборки.
@@ -68,24 +66,24 @@ public class CompilationServiceImpl implements CompilationService {
         log.info("CompilationService - удалена подборка c ИД: {}.", compId);
     }
 
-    // Добавление события в подборку.
+    // Добавление мероприятия в подборку.
     @Override
     @Transactional
     public void addEventToCompilation(Long compId, Long eventId) {
         Compilation compilation = getCompilationOrNotFound(compId);
         Event event = eventService.getEventOrNotFound(eventId);
         compilationRepository.addEventToCompilation(compId, eventId);
-        log.info("CompilationService - добавлено событие: {}, в подборку: {}.", event, compilation);
+        log.info("CompilationService - добавлено мероприятие: {}, в подборку: {}.", event, compilation);
     }
 
-    // Удаление события из подборки.
+    // Удаление мероприятия из подборки.
     @Override
     @Transactional
     public void deleteEventFromCompilation(Long compId, Long eventId) {
         Compilation compilation = getCompilationOrNotFound(compId);
         Event event = eventService.getEventOrNotFound(eventId);
         compilationRepository.deleteEventFromCompilation(compId, eventId);
-        log.info("CompilationService - удалено событие: {}, из подборки: {}.", event, compilation);
+        log.info("CompilationService - удалено мероприятие: {}, из подборки: {}.", event, compilation);
     }
 
     // Закрепить или открепить подборку на главной странице.
@@ -94,6 +92,7 @@ public class CompilationServiceImpl implements CompilationService {
     public void changePinned(Long compId, boolean pinned) {
         Compilation compilation = getCompilationOrNotFound(compId);
         compilationRepository.changePinned(compId, pinned);
+
         if (pinned) {
             log.info("CompilationService - закреплена подборки на главной странице: {}.", compilation);
         } else {
