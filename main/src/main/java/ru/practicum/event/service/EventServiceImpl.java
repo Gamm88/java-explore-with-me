@@ -68,12 +68,10 @@ public class EventServiceImpl implements EventService {
     @Override
     public EventFullDto getEventPublic(Long eventId, HttpServletRequest request) {
         Event event = getEventOrNotFound(eventId);
-        
         // В мероприятие добавляем +1 просмотр и сохраняем в БД
         event.setViews(event.getViews() + 1);
         eventRepository.save(event);
         log.info("EventService - для найденного мероприятия добавлен просмотр.");
-
         // Добавляем в статистику информацию по запросу о подробной информации мероприятия.
         httpClient.addHit(request);
         log.info("EventService - в статистику добавлена информацию по запросу о подробной информации мероприятия: {}.", request);
@@ -292,6 +290,13 @@ public class EventServiceImpl implements EventService {
         }
     }
 
+    // Проверка времени до начала мероприятия от момента публикации (не менее 1 часа).
+    public void checkEventDateIsBeforeOneHours(LocalDateTime eventDate) {
+        if (eventDate.isBefore(LocalDateTime.now().plusHours(1))) {
+            throw new ValidatorExceptions("Событие не может быть опубликовано, до его начала меньше 1 часа!");
+        }
+    }
+
     // Проверка времени до начала мероприятия от момента создания (не менее 2 часов).
     public void checkEventDateIsBeforeTwoHours(String eventDate) {
         LocalDateTime dateTime = dateUtility.stringToDate(eventDate);
@@ -300,13 +305,6 @@ public class EventServiceImpl implements EventService {
         }
     }
 
-    // Проверка времени до начала мероприятия от момента публикации (не менее 1 часа).
-    public void checkEventDateIsBeforeOneHours(LocalDateTime eventDate) {
-        if (eventDate.isBefore(LocalDateTime.now().plusHours(1))) {
-            throw new ValidatorExceptions("Событие не может быть опубликовано, до его начала меньше 1 часа!");
-        }
-    }
-    
     // Получение параметра сортировки из запроса, проверка на валидацию.
     private Sort getSortOrValidatorExceptions(String sort) {
         if (sort == null || sort.equals("EVENT_DATE")) {
