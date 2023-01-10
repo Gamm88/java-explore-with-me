@@ -112,14 +112,4 @@ public class RequestServiceImpl implements RequestService {
 
         return RequestMapper.mapToRequestDto(requests);
     }
-
-    // Изменение статуса заявки на участие в мероприятии.
-    @Override
-    public RequestDto changeRequestStatus(Request request, Status status) {
-        request.setStatus(status);
-        requestRepository.save(request);
-        log.info("RequestService - изменён статус заявки на участие в мероприятии: {}.", request);
-
-        return RequestMapper.mapToRequestDto(request);
-    }
 }

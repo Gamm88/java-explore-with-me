@@ -28,5 +28,4 @@ public interface RequestService {
 
     // Получение всех запросов на участие, по ИД мероприятия.
     List<RequestDto> getAllRequestsByEventId(Long eventId);
-
 }
