@@ -9,17 +9,17 @@ import javax.validation.constraints.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {
-    // Идентификатор пользователя (например: 3)
+    // Идентификатор пользователя.
     private Long id;
 
-    // Имя (например: Фёдоров Матвей)
-    @NotBlank(message = "Не может быть пустым")
-    @Size(max = 128, message = "Максимальная длина — 128 символов")
+    // Имя пользователя.
+    @NotBlank(message = "Имя пользователя не может быть пустым!")
+    @Size(max = 128, message = "Максимальная длина имени пользователя — 128 символов!")
     private String name;
 
-    // Электронная почта (например: petrov.i@practicummail.ru)
-    @NotBlank(message = "Не может быть пустой")
-    @Email(message = "Электронная почта указан некорректно")
-    @Size(max = 128, message = "Максимальная длина — 128 символов")
+    // Электронная почта пользователя.
+    @NotBlank(message = "Электронная почта не может быть пустой!")
+    @Email(message = "Электронная почта указан некорректно!")
+    @Size(max = 128, message = "Максимальная длина электронной почты — 128 символов!")
     private String email;
 }

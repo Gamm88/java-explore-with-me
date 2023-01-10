@@ -18,46 +18,47 @@ import javax.validation.constraints.PositiveOrZero;
 public class UserController {
     private final UserService userService;
 
-    // создать пользователя
+    // Добавление нового пользователя.
     @PostMapping
     public UserDto addUser(@Valid @RequestBody UserDto userDto) {
-        log.info("UserController - создание пользователя: {}", userDto);
+        log.info("UserController - добавление нового пользователя: {}.", userDto);
 
         return userService.addUser(userDto);
     }
 
-    // получить пользователей по списку ИД или всех
+    // Получение пользователей по списку ИД или всех.
     @GetMapping()
     public List<UserDto> getUsers(@RequestParam(value = "ids", required = false) Long[] ids,
                                   @PositiveOrZero @RequestParam(value = "from", defaultValue = "0") int from,
                                   @Positive @RequestParam(value = "size", defaultValue = "10") int size) {
-        log.info("UserController - получение списка пользователей");
+        log.info("UserController - получение пользователей по списку ИД или всех.");
 
         return userService.getUsers(ids, from, size);
     }
 
-    // получить пользователя по ИД
+    // Получение пользователя по ИД.
     @GetMapping("/{userId}")
     public UserDto getUser(@PathVariable("userId") Long userId) {
-        log.info("UserController - получение пользователя по ИД: {}", userId);
+        log.info("UserController - получение пользователя по ИД: {}.", userId);
 
         return userService.getUser(userId);
     }
 
-
-    // обновить пользователя по ИД
+    // Редактирование пользователя.
     @PatchMapping("/{userId}")
     public UserDto updateUser(@PathVariable("userId") Long userId,
                               @RequestBody UserDto userDto) {
-        log.info("UserController - обновление пользователя с ИД: {}, новое значение: {}", userId, userDto);
+        log.info("UserController - обновление пользователя с ИД: {}, новое значение: {}.", userId, userDto);
 
         return userService.updateUser(userId, userDto);
     }
 
-    // удалить пользователя по ИД
+    // Удаление пользователя.
     @DeleteMapping("/{userId}")
-    public void deleteById(@PathVariable("userId") Long userId) {
-        log.info("UserController - удаление пользователя по ИД: {}", userId);
+    public String deleteById(@PathVariable("userId") Long userId) {
+        log.info("UserController - удаление пользователя с ИД: {}.", userId);
         userService.deleteById(userId);
+
+        return "Пользователь удалён.";
     }
 }

@@ -10,6 +10,6 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class CommentNewDto {
     // Текст комментария.
-    @NotBlank
+    @NotBlank(message = "Текст комментария не может быть пустым!")
     private String text;
 }

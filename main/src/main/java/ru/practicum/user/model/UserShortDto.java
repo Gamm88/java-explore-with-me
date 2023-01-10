@@ -2,18 +2,14 @@ package ru.practicum.user.model;
 
 import lombok.*;
 
-import javax.validation.constraints.*;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserShortDto {
-    // Идентификатор пользователя (например: 3)
+    // Идентификатор пользователя.
     private Long id;
 
-    // Имя (например: Фёдоров Матвей)
-    @NotBlank(message = "Не может быть пустым")
-    @Size(max = 128, message = "Максимальная длина — 128 символов")
+    // Имя пользователя.
     private String name;
 }

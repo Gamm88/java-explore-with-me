@@ -1,8 +1,8 @@
 package ru.practicum.comment.model;
 
 import lombok.*;
-import ru.practicum.event.model.event.Event;
 import ru.practicum.user.model.User;
+import ru.practicum.event.model.event.Event;
 
 import javax.persistence.*;
 

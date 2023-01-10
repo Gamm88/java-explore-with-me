@@ -13,15 +13,16 @@ import javax.persistence.*;
 @Builder(toBuilder = true)
 @Table(name = "users")
 public class User {
-    // Идентификатор пользователя (например: 3)
+    // Идентификатор пользователя.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Имя (например: Фёдоров Матвей)
+    // Имя пользователя.
+    @Column(unique = true)
     private String name;
 
-    // Электронная почта (например: petrov.i@practicummail.ru)
+    // Электронная почта пользователя.
     @Column(unique = true)
     private String email;
 }

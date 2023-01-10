@@ -1,26 +1,34 @@
 package ru.practicum.user.service;
 
-import ru.practicum.user.model.User;
-import ru.practicum.user.model.UserDto;
+import ru.practicum.user.model.*;
 
 import java.util.List;
 
 public interface UserService {
-    // создать пользователя
+
+    /**
+     * Основные методы API.
+     */
+
+    // Добавление нового пользователя.
     UserDto addUser(UserDto userDto);
 
-    // получить пользователей по списку ИД или всех
+    // Получение пользователей по списку ИД или всех.
     List<UserDto> getUsers(Long[] ids, int from, int size);
 
-    // получить пользователя по ИД
+    // Получение пользователя по ИД.
     UserDto getUser(Long userId);
 
-    // обновление пользователя
+    // Редактирование пользователя.
     UserDto updateUser(Long userId, UserDto userDto);
 
-    // удалить пользователя по ИД
+    // Удаление пользователя.
     void deleteById(Long userId);
 
-    // получение пользователя, если не найден - ошибка 404
+    /**
+     * Вспомогательные методы.
+     */
+
+    // Получение пользователя, если не найден - ошибка 404.
     User getUserOrNotFound(Long userId);
 }

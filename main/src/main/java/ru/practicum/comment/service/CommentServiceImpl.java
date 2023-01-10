@@ -1,15 +1,15 @@
 package ru.practicum.comment.service;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import ru.practicum.comment.model.*;
+import ru.practicum.user.model.User;
+import lombok.RequiredArgsConstructor;
+import ru.practicum.event.model.event.Event;
+import ru.practicum.user.service.UserService;
 import org.springframework.stereotype.Service;
 import ru.practicum.comment.CommentRepository;
-import ru.practicum.comment.model.*;
-import ru.practicum.event.model.event.Event;
 import ru.practicum.event.service.EventService;
 import ru.practicum.exeptions.NotFoundException;
-import ru.practicum.user.model.User;
-import ru.practicum.user.service.UserService;
 
 import java.util.List;
 
@@ -19,7 +19,6 @@ import java.util.List;
 public class CommentServiceImpl implements CommentService {
     private final UserService userService;
     private final EventService eventService;
-    private final CommentMapper commentMapper;
     private final CommentRepository commentRepository;
 
     /**
@@ -31,11 +30,11 @@ public class CommentServiceImpl implements CommentService {
     public CommentDto addComment(Long userId, Long eventId, CommentNewDto commentNewDto) {
         User user = userService.getUserOrNotFound(userId);
         Event event = eventService.getEventOrNotFound(eventId);
-        Comment comment = commentMapper.mapToComment(user, event, commentNewDto);
+        Comment comment = CommentMapper.mapToComment(user, event, commentNewDto);
         commentRepository.save(comment);
         log.info("CommentService - добавлен новый комментарий: {}.", comment);
 
-        return commentMapper.mapToCommentDto(comment);
+        return CommentMapper.mapToCommentDto(comment);
     }
 
     // Получение комментария по ИД.
@@ -44,7 +43,7 @@ public class CommentServiceImpl implements CommentService {
         Comment comment = getCommentOrNotFound(commentId);
         log.info("CommentService - предоставлен комментарий: {}.", comment);
 
-        return commentMapper.mapToCommentDto(comment);
+        return CommentMapper.mapToCommentDto(comment);
     }
 
     // Удаление комментария.
@@ -67,7 +66,7 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> comments = commentRepository.getAllCommentsByUserId(userId);
         log.info("CommentService - предоставлены комментарии: {}.", comments);
 
-        return commentMapper.mapToCommentDto(comments);
+        return CommentMapper.mapToCommentDto(comments);
     }
 
     // Получение всех комментариев события.
@@ -77,7 +76,7 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> comments = commentRepository.getAllCommentsByEventId(eventId);
         log.info("CommentService - предоставлены комментарии: {}.", comments);
 
-        return commentMapper.mapToCommentDto(comments);
+        return CommentMapper.mapToCommentDto(comments);
     }
 
     // Редактирование комментария.
@@ -89,7 +88,7 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.save(comment);
         log.info("CommentService - изменён текст комментария: {}.", comment);
 
-        return commentMapper.mapToCommentDto(comment);
+        return CommentMapper.mapToCommentDto(comment);
     }
 
     /**
@@ -100,6 +99,6 @@ public class CommentServiceImpl implements CommentService {
     private Comment getCommentOrNotFound(Long commentId) {
         return commentRepository
                 .findById(commentId)
-                .orElseThrow(() -> new NotFoundException("Комментарий с ИД: " + commentId + ", не найдена!"));
+                .orElseThrow(() -> new NotFoundException("Комментарий с ИД: " + commentId + ", не найден!"));
     }
 }
