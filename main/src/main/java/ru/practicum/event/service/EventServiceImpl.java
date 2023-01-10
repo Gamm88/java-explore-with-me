@@ -58,10 +58,10 @@ public class EventServiceImpl implements EventService {
         httpClient.addHit(request);
         log.info("EventService - в статистику добавлена информацию об обращении к списку мероприятий: {}.", request);
 
-        List<EventShortDto> EventShortDtoList = EventMapper.mapToEventShortDto(events);
-        log.info("EventService - предоставлен список мероприятий: {}.", EventShortDtoList);
+        List<EventShortDto> eventShortDtoList = EventMapper.mapToEventShortDto(events);
+        log.info("EventService - предоставлен список мероприятий: {}.", eventShortDtoList);
 
-        return EventShortDtoList;
+        return eventShortDtoList;
     }
 
     // Получение мероприятия по ИД.
