@@ -27,7 +27,7 @@ public class CompilationServiceImpl implements CompilationService {
 
     // Получение подборок.
     @Override
-    public List<CompilationDto> getAllCompilations(boolean pinned, int from, int size) {
+    public List<CompilationDto> getCompilations(boolean pinned, int from, int size) {
         PageRequest pageRequest = PageRequest.of(from / size, size);
         List<Compilation> compilations = compilationRepository.findAllByPinnedIs(pinned, pageRequest);
         log.info("CompilationService - предоставлены подборки: {}.", compilations);

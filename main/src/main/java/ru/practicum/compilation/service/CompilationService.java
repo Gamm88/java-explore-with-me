@@ -12,7 +12,7 @@ public interface CompilationService {
      */
 
     // Получение подборок.
-    List<CompilationDto> getAllCompilations(boolean pinned, int from, int size);
+    List<CompilationDto> getCompilations(boolean pinned, int from, int size);
 
     // Получение подборки по ИД.
     CompilationDto getCompilationById(Long compId);

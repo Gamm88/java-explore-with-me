@@ -22,16 +22,16 @@ public class CompilationController {
      * Публичные эндпоинты, для всех пользователей.
      */
 
-    // Получение подборок.
+    // Получение всех подборок.
     @GetMapping("/compilations")
-    public List<CompilationDto> getAllCompilations(@RequestParam(value = "pinned", required = false) boolean pinned,
-                                                   @PositiveOrZero @RequestParam(value = "from", defaultValue = "0")
-                                                   int from,
-                                                   @Positive @RequestParam(value = "size", defaultValue = "10")
-                                                   int size) {
-        log.info("CompilationController - получение подборок.");
+    public List<CompilationDto> getCompilations(@RequestParam(value = "pinned", required = false) boolean pinned,
+                                                @PositiveOrZero @RequestParam(value = "from", defaultValue = "0")
+                                                int from,
+                                                @Positive @RequestParam(value = "size", defaultValue = "10")
+                                                int size) {
+        log.info("CompilationController - получение всех подборок.");
 
-        return compilationService.getAllCompilations(pinned, from, size);
+        return compilationService.getCompilations(pinned, from, size);
     }
 
     // Получение подборки по ИД.

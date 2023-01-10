@@ -39,7 +39,7 @@ public class UserController {
     // Получение пользователя по ИД.
     @GetMapping("/{userId}")
     public UserDto getUser(@PathVariable("userId") Long userId) {
-        log.info("UserController - получение пользователя по ИД: {}.", userId);
+        log.info("UserController - получение пользователя с ИД: {}.", userId);
 
         return userService.getUser(userId);
     }
