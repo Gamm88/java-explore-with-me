@@ -6,16 +6,13 @@ import ru.practicum.event.model.location.Location;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotBlank;
 
-/**
- * Новое событие создаваемое пользователем
- */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class EventNewDto {
     // Идентификатор события (например: 3)
-    private Long eventId;
+    private Long id;
 
     // Заголовок события (например: Сплав на байдарках)
     @NotBlank(message = "Заголовок не может быть пустым")

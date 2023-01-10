@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import java.util.List;
 
 public interface EventRepository extends JpaRepository<Event, Long>, JpaSpecificationExecutor<Event> {
-    // Получение событий созданных пользователем
+    // Получение мероприятий созданных пользователем
     List<Event> findAllByInitiatorId(Long initiatorId, Pageable pageable);
 }

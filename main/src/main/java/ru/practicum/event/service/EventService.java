@@ -3,63 +3,58 @@ package ru.practicum.event.service;
 import ru.practicum.event.model.event.*;
 import ru.practicum.request.model.RequestDto;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 public interface EventService {
-    /**
-     * Публичные методы, в выдаче должны быть только опубликованные события.
-     */
-
-    // Поиск краткой информации о событиях, по параметрам поиска.
-    List<EventShortDto> getAllPublic(EventQueryParams eventQueryParams, HttpServletRequest request);
-
-    // Получение подробной информации о событии, по его ИД.
-    EventFullDto getEventByIdPublic(Long eventId, HttpServletRequest request);
 
     /**
-     * Приватные методы, только для пользователей прошедших авторизацию.
+     * Публичные методы API, в выдаче должны быть только опубликованные мероприятия.
      */
 
-    // Создать мероприятие.
-    EventFullDto addEventPrivate(Long userId, EventNewDto eventNewDto);
+    // Поиск краткой информации о мероприятиях, по параметрам поиска.
+    List<EventShortDto> getEventsPublic(EventQueryParams eventQueryParams, HttpServletRequest request);
 
-    // Получение событий созданных пользователем
-    List<EventShortDto> getAllEventsPrivate(Long userId, int from, int size);
-
-    // Изменение события созданного пользователем
-    EventFullDto updateEventPrivate(Long userId, EventNewDto eventNewDto);
-
-    // Получение подробной информации о событии созданного пользователем, по ИД
-    EventFullDto getEventByIdPrivate(Long userId, Long eventId);
-
-    // Отмена события созданного пользователем, по ИД
-    EventFullDto cancelEventByIdPrivate(Long userId, Long eventId);
-
-    // Получение информации о запросах на участие в событии пользователя, по ИД
-    List<RequestDto> getEventRequestsPrivate(Long userId, Long eventId);
-
-    // Подтверждение чужой заявки на участие в событии пользователя, по ДИ
-    RequestDto confirmRequestPrivate(Long userId, Long eventId, Long reqId);
-
-    // Отклонение чужой заявки на участие в событии пользователя, по ДИ
-    RequestDto rejectRequestPrivate(Long userId, Long eventId, Long reqId);
+    // Получение мероприятия по ИД.
+    EventFullDto getEventPublic(Long eventId, HttpServletRequest request);
 
     /**
-     * Административные методы, только для администраторов сервиса.
+     * Приватные методы API, только для пользователей прошедших авторизацию.
      */
 
-    // Предоставление полной информацию обо всех событиях подходящих под переданные условия.
-    List<EventFullDto> getAllEventsAdmin(EventQueryParams eventQueryParams);
+    // Добавление нового мероприятия.
+    EventFullDto addEventUser(Long userId, EventNewDto eventNewDto);
 
-    // Редактирование данных события администратором.
+    // Получение мероприятий созданных пользователем.
+    List<EventShortDto> getEventsUser(Long userId, int from, int size);
+
+    // Редактирование мероприятия.
+    EventFullDto updateEventUser(Long userId, EventNewDto eventNewDto);
+
+    // Получение мероприятия по ИД.
+    EventFullDto getEventUser(Long userId, Long eventId);
+
+    // Отмена мероприятия по ИД.
+    EventFullDto cancelEventUser(Long userId, Long eventId);
+
+    // Получение информации о запросах на участие в мероприятии.
+    List<RequestDto> getEventRequestsUser(Long userId, Long eventId);
+
+    // Подтверждение или отклонение заявки на участие в мероприятии.
+    RequestDto changeRequestStatusUser(Long userId, Long eventId, Long reqId, boolean status);
+
+    /**
+     * Административные методы API, только для администраторов сервиса.
+     */
+
+    // Поиск полной информации о мероприятиях, по параметрам поиска.
+    List<EventFullDto> getEventsAdmin(EventQueryParams eventQueryParams);
+
+    // Редактирование мероприятия.
     EventFullDto updateEventAdmin(Long eventId, EventNewDto eventNewDto);
 
-    // Публикация ранее созданного события.
-    EventFullDto publishEventAdmin(Long eventId);
-
-    // Отклонение ранее созданного события.
-    EventFullDto rejectEventAdmin(Long eventId);
+    // Изменение состояния публикации мероприятия.
+    EventFullDto changeEventState(Long eventId, boolean state);
 
     /**
      * Внутренние методы приложения

@@ -13,12 +13,12 @@ import java.util.List;
 
 @Component
 public class EventMapper {
-    private final DateUtility dateUtility = new DateUtility();
+    private static final DateUtility dateUtility = new DateUtility();
 
     //из NewEventDto в Event
-    public Event mapToEvent(User user, EventNewDto eventNewDto, Category category) {
+    public static Event mapToEvent(User user, EventNewDto eventNewDto, Category category) {
         return Event.builder()
-                .id(eventNewDto.getEventId())
+                .id(eventNewDto.getId())
                 .title(eventNewDto.getTitle())
                 .annotation(eventNewDto.getAnnotation())
                 .category(category)
@@ -37,7 +37,7 @@ public class EventMapper {
     }
 
     //из Event в EventShortDto
-    public EventShortDto mapToEventShortDto(Event event) {
+    public static EventShortDto mapToEventShortDto(Event event) {
         return EventShortDto.builder()
                 .id(event.getId())
                 .title(event.getTitle())
@@ -52,7 +52,7 @@ public class EventMapper {
     }
 
     //из Event в EventFullDto
-    public EventFullDto mapToEventFullDto(Event event) {
+    public static EventFullDto mapToEventFullDto(Event event) {
         return EventFullDto.builder()
                 .id(event.getId())
                 .title(event.getTitle())
@@ -74,7 +74,7 @@ public class EventMapper {
     }
 
     //получение списка EventShortDto из списка Event
-    public List<EventShortDto> mapToEventShortDto(Iterable<Event> events) {
+    public static List<EventShortDto> mapToEventShortDto(Iterable<Event> events) {
         List<EventShortDto> dtos = new ArrayList<>();
         for (Event event : events) {
             dtos.add(mapToEventShortDto(event));
@@ -83,7 +83,7 @@ public class EventMapper {
     }
 
     //получение списка EventFullDto из списка Event
-    public List<EventFullDto> mapToEventFullDto(Iterable<Event> events) {
+    public static List<EventFullDto> mapToEventFullDto(Iterable<Event> events) {
         List<EventFullDto> dtos = new ArrayList<>();
         for (Event event : events) {
             dtos.add(mapToEventFullDto(event));

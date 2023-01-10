@@ -29,6 +29,4 @@ public interface RequestService {
     // Получение всех запросов на участие, по ИД мероприятия.
     List<RequestDto> getAllRequestsByEventId(Long eventId);
 
-    // Изменение статуса заявки на участие в мероприятии.
-    RequestDto changeRequestStatus(Request request, Status status);
 }
