@@ -2,19 +2,14 @@ package ru.practicum.category.model;
 
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
-
 @Data
-@Getter
-@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class CategoryDto {
-    // Идентификатор категории (например: 3)
+    // Идентификатор категории.
     private Long id;
 
-    // Название категории (например: Концерты)
-    @NotBlank(message = "Не указано имя категории")
+    // Название категории.
     private String name;
 }

@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
 import ru.practicum.category.model.CategoryDto;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.category.model.NewCategoryDto;
+import ru.practicum.category.model.CategoryNewDto;
 import ru.practicum.category.service.CategoryService;
 
 import java.util.List;
@@ -15,49 +15,49 @@ import javax.validation.constraints.PositiveOrZero;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping()
 public class CategoryController {
     private final CategoryService categoryService;
 
-    // создать категорию
+    // Добавление новой категории.
     @PostMapping("/admin/categories")
-    public CategoryDto addCategories(@Valid @RequestBody NewCategoryDto categoryDto) {
-        log.info("CategoryController - создание категории: {}", categoryDto);
+    public CategoryDto addCategory(@Valid @RequestBody CategoryNewDto categoryNewDto) {
+        log.info("CategoryController - добавление новой категории: {}.", categoryNewDto);
 
-        return categoryService.addCategory(categoryDto);
+        return categoryService.addCategory(categoryNewDto);
     }
 
-    // получить категории по списку ИД или всех
+    // Получение категорий по списку ИД или всех.
     @GetMapping("/categories")
     public List<CategoryDto> getCategories(@RequestParam(value = "ids", required = false) Long[] ids,
                                            @PositiveOrZero @RequestParam(value = "from", defaultValue = "0") int from,
                                            @Positive @RequestParam(value = "size", defaultValue = "10") int size) {
-        log.info("CategoryController - получение списка категорий");
+        log.info("CategoryController - получение категорий по списку ИД или всех.");
 
         return categoryService.getCategories(ids, from, size);
     }
 
-    // получить категорию по ИД
+    // Получение категории по ИД.
     @GetMapping("/categories/{catId}")
-    public CategoryDto getCategories(@PathVariable("catId") Long categoryId) {
-        log.info("CategoryController - получение категории по ИД: {}", categoryId);
+    public CategoryDto getCategory(@PathVariable("catId") Long categoryId) {
+        log.info("CategoryController - получение категории с ИД: {}.", categoryId);
 
         return categoryService.getCategory(categoryId);
     }
 
-    // обновить категорию по ИД
+    // Редактирование категории.
     @PatchMapping("/admin/categories")
-    public CategoryDto updateCategories(@Valid @RequestBody CategoryDto categoryDto) {
-        log.info("CategoryController - обновление категории с ИД: {}, новое значение: {}",
-                categoryDto.getId(), categoryDto);
+    public CategoryDto updateCategory(@Valid @RequestBody CategoryDto categoryDto) {
+        log.info("CategoryController - обновление категории, новое значение: {}.", categoryDto);
 
-        return categoryService.updateCategory(categoryDto.getId(), categoryDto);
+        return categoryService.updateCategory(categoryDto);
     }
 
-    // удалить категорию по ИД
+    // Удаление категории.
     @DeleteMapping("/admin/categories/{catId}")
-    public void deleteById(@PathVariable("catId") Long categoryId) {
+    public String deleteCategory(@PathVariable("catId") Long categoryId) {
         log.info("CategoryController - удаление категорию по ИД: {}", categoryId);
-        categoryService.deleteById(categoryId);
+        categoryService.deleteCategory(categoryId);
+
+        return "Категория удалена.";
     }
 }

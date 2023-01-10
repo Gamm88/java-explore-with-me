@@ -62,28 +62,28 @@ public class UserServiceImpl implements UserService {
     // Редактирование пользователя.
     @Override
     public UserDto updateUser(Long userId, UserDto userDto) {
-        User updatedUser = getUserOrNotFound(userId);
+        User user = getUserOrNotFound(userId);
         String newName = userDto.getName();
         String newEmail = userDto.getEmail();
 
         if (newName != null) {
             checkUserNameUnique(newName);
-            updatedUser.setName(newName);
+            user.setName(newName);
         }
         if (newEmail != null) {
             checkUserEmailUnique(newEmail);
-            updatedUser.setEmail(newEmail);
+            user.setEmail(newEmail);
         }
 
-        updatedUser = userRepository.save(updatedUser);
-        log.info("UserService - обновлён пользователь: {}.", updatedUser);
+        userRepository.save(user);
+        log.info("UserService - обновлён пользователь: {}.", user);
 
-        return UserMapper.mapToUserDto(updatedUser);
+        return UserMapper.mapToUserDto(user);
     }
 
     // Удаление пользователя.
     @Override
-    public void deleteById(Long userId) {
+    public void deleteUser(Long userId) {
         getUserOrNotFound(userId);
         userRepository.deleteById(userId);
         log.info("UserController - удалён пользователь с ИД: {}", userId);

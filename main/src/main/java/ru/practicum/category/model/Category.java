@@ -13,12 +13,12 @@ import javax.persistence.*;
 @Builder(toBuilder = true)
 @Table(name = "categories")
 public class Category {
-    // Идентификатор категории (например: 3)
+    // Идентификатор категории.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Название категории (например: Концерты)
+    // Название категории.
     @Column(unique = true)
     private String name;
 }

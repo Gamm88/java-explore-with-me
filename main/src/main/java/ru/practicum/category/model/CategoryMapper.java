@@ -1,16 +1,13 @@
 package ru.practicum.category.model;
 
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.ArrayList;
 
-@Component
 public class CategoryMapper {
     //из newCategoryDto в Category
-    public static Category mapToCategory(NewCategoryDto newCategoryDto) {
+    public static Category mapToCategory(CategoryNewDto categoryNewDto) {
         return Category.builder()
-                .name(newCategoryDto.getName())
+                .name(categoryNewDto.getName())
                 .build();
     }
 
@@ -21,7 +18,6 @@ public class CategoryMapper {
                 .name(category.getName())
                 .build();
     }
-
 
     //получение списка CategoriesDto из списка Categories
     public static List<CategoryDto> mapToCategoryDto(Iterable<Category> categories) {

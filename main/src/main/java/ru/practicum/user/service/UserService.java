@@ -23,7 +23,7 @@ public interface UserService {
     UserDto updateUser(Long userId, UserDto userDto);
 
     // Удаление пользователя.
-    void deleteById(Long userId);
+    void deleteUser(Long userId);
 
     /**
      * Вспомогательные методы.
