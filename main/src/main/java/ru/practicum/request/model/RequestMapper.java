@@ -1,17 +1,15 @@
 package ru.practicum.request.model;
 
 import ru.practicum.components.DateUtility;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.ArrayList;
 
-@Component
 public class RequestMapper {
-    private final DateUtility dateUtility = new DateUtility();
+    private static final DateUtility dateUtility = new DateUtility();
 
     //из Request в RequestDto
-    public RequestDto mapToRequestDto(Request request) {
+    public static RequestDto mapToRequestDto(Request request) {
         return RequestDto.builder()
                 .id(request.getId())
                 .event(request.getEvent().getId())
@@ -22,7 +20,7 @@ public class RequestMapper {
     }
 
     //получение списка RequestDto из списка Request
-    public List<RequestDto> mapToRequestDto(Iterable<Request> requests) {
+    public static List<RequestDto> mapToRequestDto(Iterable<Request> requests) {
         List<RequestDto> dtos = new ArrayList<>();
         for (Request request : requests) {
             dtos.add(mapToRequestDto(request));

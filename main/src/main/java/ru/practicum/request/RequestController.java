@@ -15,31 +15,30 @@ import java.util.List;
 public class RequestController {
     private final RequestService requestService;
 
-    // Добавление запроса пользователя на участие в мероприятии
+    // Добавление нового запроса пользователя на участие в мероприятии.
     @PostMapping
     public RequestDto addRequest(@PathVariable Long userId,
                                  @RequestParam(value = "eventId") Long eventId) {
-        log.info("RequestController - добавление запроса пользователя с ИД: {}, " +
-                "на участие в мероприятии ИД: {}", userId, eventId);
+        log.info("RequestController - добавление нового запроса пользователя с ИД: {}, " +
+                "на участие в мероприятии с ИД: {}.", userId, eventId);
 
         return requestService.addRequest(userId, eventId);
     }
 
-    // Получение информации о заявках пользователя на участие в мероприятиях
+    // Получение заявок пользователя на участие в мероприятиях.
     @GetMapping
     public List<RequestDto> getRequests(@PathVariable Long userId) {
-        log.info("RequestController - Получение информации о заявках пользователя с ИД: {}, " +
-                "на участие в чужих мероприятиях", userId);
+        log.info("RequestController - получение заявок пользователя с ИД: {}, на участие в мероприятиях.", userId);
 
         return requestService.getRequests(userId);
     }
 
-    // Отмена запроса пользователя на участие в мероприятии
+    // Отмена запроса пользователя на участие в мероприятии.
     @PatchMapping("/{requestId}/cancel")
     public RequestDto canceledRequest(@PathVariable Long userId,
                                       @PathVariable Long requestId) {
-        log.info("RequestController - отмена запроса с ИД: {}, пользователя с ИД: {}, " +
-                "на участие в мероприятии", requestId, userId);
+        log.info("RequestController - отмена запроса пользователя с ИД: {}, " +
+                "на участие в мероприятии с ИД: {}.", userId, requestId);
 
         return requestService.canceledRequest(userId, requestId);
     }

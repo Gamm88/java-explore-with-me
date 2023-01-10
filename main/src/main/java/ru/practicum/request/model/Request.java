@@ -7,9 +7,6 @@ import ru.practicum.event.model.event.Event;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-/**
- * Запрос на участие в событии, хранящийся в БД
- */
 @Entity
 @Getter
 @Setter
@@ -19,25 +16,25 @@ import java.time.LocalDateTime;
 @Builder(toBuilder = true)
 @Table(name = "requests")
 public class Request {
-    // Идентификатор запроса (например: 3)
+    // Идентификатор запроса.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Событие хранящееся в БД
+    // Мероприятие, на которое осуществляется запрос.
     @ManyToOne()
     @JoinColumn(name = "event_id")
     private Event event;
 
-    // Пользователь хранящийся в БД
+    // Пользователь отправивший запрос.
     @ManyToOne()
     @JoinColumn(name = "requester_id")
     private User requester;
 
-    // Дата и время создания заявки. Дата и время указываются в формате "yyyy-MM-dd HH:mm:ss"
+    // Дата и время создания заявки, в формате "yyyy-MM-dd HH:mm:ss"
     private LocalDateTime created;
 
-    // Статус заявки [PENDING, CONFIRMED, REJECTED, CANCELED]
+    // Статус запроса [PENDING, CONFIRMED, REJECTED, CANCELED].
     @Enumerated(EnumType.STRING)
     private Status status;
 }

@@ -182,7 +182,7 @@ public class EventServiceImpl implements EventService {
             throw new ValidatorExceptions("Достигнут лимит участников в событии");
         }
 
-        RequestDto requestDto = requestService.changeStatusAndSaveRequest(request, Status.CONFIRMED);
+        RequestDto requestDto = requestService.changeRequestStatus(request, Status.CONFIRMED);
         increaseConfirmedRequests(event);
         log.info("EventService - подтверждена заявка на участие в мероприятии: {}", request);
 
@@ -196,7 +196,7 @@ public class EventServiceImpl implements EventService {
         getEventOrNotFound(eventId);
         Request request = requestService.getRequestOrNotFound(reqId);
 
-        RequestDto requestDto = requestService.changeStatusAndSaveRequest(request, Status.REJECTED);
+        RequestDto requestDto = requestService.changeRequestStatus(request, Status.REJECTED);
         log.info("EventService - отклонена заявка на участие в мероприятии: {}", requestDto);
 
         return requestDto;
