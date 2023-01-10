@@ -1,24 +1,20 @@
 package ru.practicum.event.model.event;
 
-import org.springframework.stereotype.Component;
-import ru.practicum.category.model.Category;
-import ru.practicum.category.model.CategoryDto;
+import ru.practicum.user.model.*;
+import ru.practicum.category.model.*;
 import ru.practicum.components.DateUtility;
-import ru.practicum.user.model.User;
-import ru.practicum.user.model.UserShortDto;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
+import java.time.LocalDateTime;
 
-@Component
 public class EventMapper {
     private static final DateUtility dateUtility = new DateUtility();
 
     //из NewEventDto в Event
     public static Event mapToEvent(User user, EventNewDto eventNewDto, Category category) {
         return Event.builder()
-                .id(eventNewDto.getId())
+                .id(eventNewDto.getEventId())
                 .title(eventNewDto.getTitle())
                 .annotation(eventNewDto.getAnnotation())
                 .category(category)

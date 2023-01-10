@@ -3,9 +3,9 @@ package ru.practicum.event.model.event;
 import ru.practicum.components.DateUtility;
 import org.springframework.data.jpa.domain.Specification;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.time.LocalDateTime;
 
 /**
