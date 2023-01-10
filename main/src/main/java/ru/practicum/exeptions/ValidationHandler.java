@@ -20,14 +20,15 @@ import java.util.stream.Collectors;
 public class ValidationHandler extends ResponseEntityExceptionHandler {
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                  HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+
         List<String> errors = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.toList());
-        ValidError validError = new ValidError("Введены некорректные параметры объекта", errors);
+        ValidError validError = new ValidError("Введены некорректные параметры объекта!", errors);
         log.info("ValidationHandler исключение - " + validError);
 
         return new ResponseEntity<>(validError, status);

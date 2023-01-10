@@ -3,16 +3,14 @@ package ru.practicum.exeptions;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 
 @Slf4j
 @RestControllerAdvice
 public class ErrorHandler {
 
-    // Перехват ошибки не найденных данных
+    // Перехват ошибки ненайденных данных.
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleNotFoundException(final NotFoundException e) {
@@ -21,7 +19,7 @@ public class ErrorHandler {
         return new ErrorResponse(e.getMessage());
     }
 
-    // Перехват ошибки дублирования данных
+    // Перехват ошибки дублирования данных.
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponse handleDuplicateException(final DuplicateException e) {
@@ -30,7 +28,7 @@ public class ErrorHandler {
         return new ErrorResponse(e.getMessage());
     }
 
-    // Перехват ошибки некорректного запроса
+    // Перехват ошибки некорректного запроса.
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleValidatorException(final ValidatorExceptions e) {
@@ -39,7 +37,7 @@ public class ErrorHandler {
         return new ErrorResponse(e.getMessage());
     }
 
-    // Перехват ошибки без обязательного query params
+    // Перехват ошибки без обязательного query params.
     @ExceptionHandler(MissingServletRequestParameterException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleMissingParams(MissingServletRequestParameterException e) {

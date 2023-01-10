@@ -19,7 +19,7 @@ public class HttpClient {
     private final RestTemplate template;
     private final DateUtility dateUtility;
 
-    public HttpClient(@Value("${ewm-stat.url}") String url,
+    public HttpClient(@Value("http://localhost:9090") String url,
                       RestTemplateBuilder template,
                       DateUtility dateUtility) {
         this.dateUtility = dateUtility;
