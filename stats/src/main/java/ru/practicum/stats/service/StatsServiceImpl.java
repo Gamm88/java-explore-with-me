@@ -4,9 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
 import ru.practicum.stats.model.hit.*;
 import ru.practicum.stats.model.stats.*;
-import ru.practicum.stats.StatsRepository;
 import ru.practicum.components.DateUtility;
 import org.springframework.stereotype.Service;
+import ru.practicum.stats.repository.StatsRepository;
 
 import java.util.List;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package ru.practicum.comment;
+package ru.practicum.comment.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import ru.practicum.comment.model.*;
@@ -16,9 +16,7 @@ import javax.validation.constraints.Positive;
 public class CommentController {
     private final CommentService commentService;
 
-    /**
-     * Приватные эндпоинты, только для пользователей прошедших авторизацию.
-     */
+    // Приватные эндпоинты, только для пользователей прошедших авторизацию:
 
     // Добавление нового комментария.
     @PostMapping("/users/{userId}/comments/events/{eventId}")
@@ -40,6 +38,7 @@ public class CommentController {
 
     // Удаление комментария.
     @DeleteMapping("/users/{userId}/comments/{commentId}")
+    @ResponseBody
     public String deleteComment(@PathVariable Long userId,
                                 @PathVariable Long commentId) {
         log.info("CommentService - удаление комментария с ИД: {}.", commentId);
@@ -48,9 +47,7 @@ public class CommentController {
         return "Комментарий удалён.";
     }
 
-    /**
-     * Административные эндпоинты, только для администраторов.
-     */
+    // Административные эндпоинты, только для администраторов:
 
     // Получение всех комментариев пользователя.
     @GetMapping("/admin/comments/users/{userId}")
@@ -63,7 +60,7 @@ public class CommentController {
     // Получение всех комментариев события.
     @GetMapping("/admin/comments/events/{eventId}")
     public List<CommentDto> getAllCommentsByEventId(@PathVariable Long eventId) {
-        log.info("CommentService - получение всех комментариев события с ИД: {}.", eventId);
+        log.info("CommentService - получение всех комментариев мероприятия с ИД: {}.", eventId);
 
         return commentService.getAllCommentsByEventId(eventId);
     }

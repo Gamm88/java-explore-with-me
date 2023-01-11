@@ -1,4 +1,4 @@
-package ru.practicum.comment;
+package ru.practicum.comment.repository;
 
 import ru.practicum.comment.model.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;

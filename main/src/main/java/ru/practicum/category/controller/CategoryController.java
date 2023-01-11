@@ -1,4 +1,4 @@
-package ru.practicum.category;
+package ru.practicum.category.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
@@ -54,6 +54,7 @@ public class CategoryController {
 
     // Удаление категории.
     @DeleteMapping("/admin/categories/{catId}")
+    @ResponseBody
     public String deleteCategory(@PathVariable("catId") Long categoryId) {
         log.info("CategoryController - удаление категорию по ИД: {}", categoryId);
         categoryService.deleteCategory(categoryId);

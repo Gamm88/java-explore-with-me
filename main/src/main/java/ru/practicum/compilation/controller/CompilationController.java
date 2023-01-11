@@ -1,4 +1,4 @@
-package ru.practicum.compilation;
+package ru.practicum.compilation.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +18,7 @@ import javax.validation.constraints.PositiveOrZero;
 public class CompilationController {
     private final CompilationService compilationService;
 
-    /**
-     * Публичные эндпоинты, для всех пользователей.
-     */
+    // Публичные эндпоинты, для всех пользователей:
 
     // Получение всех подборок.
     @GetMapping("/compilations")
@@ -42,9 +40,7 @@ public class CompilationController {
         return compilationService.getCompilationById(compId);
     }
 
-    /**
-     * Административные эндпоинты, только для администраторов.
-     */
+    // Административные эндпоинты, только для администраторов:
 
     // Добавление новой подборки.
     @PostMapping("/admin/compilations")
@@ -56,6 +52,7 @@ public class CompilationController {
 
     // Удаление подборки.
     @DeleteMapping("/admin/compilations/{compId}")
+    @ResponseBody
     public String deleteCompilation(@PathVariable("compId") Long compId) {
         log.info("CompilationController - удаление подборки с ИД: {}.", compId);
         compilationService.deleteCompilation(compId);
@@ -65,6 +62,7 @@ public class CompilationController {
 
     // Добавление мероприятия в подборку.
     @PatchMapping("/admin/compilations/{compId}/events/{eventId}")
+    @ResponseBody
     public String addEventToCompilation(@PathVariable("compId") Long compId,
                                         @PathVariable("eventId") Long eventId) {
         log.info("CompilationController - добавление мероприятия с ИД: {}, в подборку с ИД: {}.", eventId, compId);
@@ -75,6 +73,7 @@ public class CompilationController {
 
     // Удаление мероприятия из подборки.
     @DeleteMapping("/admin/compilations/{compId}/events/{eventId}")
+    @ResponseBody
     public String deleteEventFromCompilation(@PathVariable("compId") Long compId,
                                              @PathVariable("eventId") Long eventId) {
         log.info("CompilationController - удаление мероприятия с ИД: {}, из подборки с ИД: {}.", eventId, compId);
@@ -85,6 +84,7 @@ public class CompilationController {
 
     // Закрепить подборку на главной странице.
     @PatchMapping("/admin/compilations/{compId}/pin")
+    @ResponseBody
     public String pinCompilationToMainPage(@PathVariable("compId") Long compId) {
         log.info("CompilationController - закрепление подборки с ИД: {} на главной странице.", compId);
         compilationService.changePinned(compId, true);
@@ -94,6 +94,7 @@ public class CompilationController {
 
     // Открепить подборку на главной странице.
     @DeleteMapping("/admin/compilations/{compId}/pin")
+    @ResponseBody
     public String unpinCompilationToMainPage(@PathVariable("compId") Long compId) {
         log.info("CompilationController - открепление подборки с ИД: {} на главной странице.", compId);
         compilationService.changePinned(compId, false);

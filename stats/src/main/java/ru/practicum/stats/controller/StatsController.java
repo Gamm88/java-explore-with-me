@@ -1,4 +1,4 @@
-package ru.practicum.stats;
+package ru.practicum.stats.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +18,7 @@ public class StatsController {
     // Добавление информации о том, что на uri конкретного сервиса был отправлен запрос пользователем.
     // Название сервиса, uri и ip пользователя указаны в теле запроса.
     @PostMapping("/hit")
+    @ResponseBody
     public String addHit(@RequestBody HitDto hitDto) {
         log.info("HitController - сохранение информации о запросе к эндпоинту: {}.", hitDto);
         statsService.addHit(hitDto);

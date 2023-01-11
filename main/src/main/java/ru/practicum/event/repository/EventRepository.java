@@ -1,4 +1,4 @@
-package ru.practicum.event;
+package ru.practicum.event.repository;
 
 import ru.practicum.event.model.event.Event;
 import org.springframework.data.domain.Pageable;

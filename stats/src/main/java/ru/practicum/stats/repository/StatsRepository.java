@@ -1,4 +1,4 @@
-package ru.practicum.stats;
+package ru.practicum.stats.repository;
 
 import org.springframework.data.jpa.repository.Query;
 import ru.practicum.stats.model.hit.Hit;

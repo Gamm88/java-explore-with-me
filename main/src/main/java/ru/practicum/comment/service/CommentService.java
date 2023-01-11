@@ -5,10 +5,7 @@ import ru.practicum.comment.model.*;
 import java.util.List;
 
 public interface CommentService {
-
-    /**
-     * Приватные сервисы, только для пользователей прошедших авторизацию.
-     */
+    // Приватные сервисы, только для пользователей прошедших авторизацию:
 
     // Добавление нового комментария.
     CommentDto addComment(Long userId, Long eventId, CommentNewDto commentNewDto);
@@ -19,9 +16,7 @@ public interface CommentService {
     // Удаление комментария.
     void deleteComment(Long userId, Long commentId);
 
-    /**
-     * Административные сервисы, только для администраторов.
-     */
+    // Административные сервисы, только для администраторов:
 
     // Получение всех комментариев пользователя.
     List<CommentDto> getAllCommentsByUserId(Long userId);

@@ -5,10 +5,7 @@ import ru.practicum.user.model.*;
 import java.util.List;
 
 public interface UserService {
-
-    /**
-     * Основные методы API.
-     */
+    // Основные методы API:
 
     // Добавление нового пользователя.
     UserDto addUser(UserDto userDto);
@@ -25,9 +22,7 @@ public interface UserService {
     // Удаление пользователя.
     void deleteUser(Long userId);
 
-    /**
-     * Вспомогательные методы.
-     */
+    // Вспомогательные методы:
 
     // Получение пользователя, если не найден - ошибка 404.
     User getUserOrNotFound(Long userId);

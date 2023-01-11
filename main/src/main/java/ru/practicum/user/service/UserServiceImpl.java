@@ -3,10 +3,10 @@ package ru.practicum.user.service;
 import lombok.extern.slf4j.Slf4j;
 import ru.practicum.user.model.*;
 import lombok.RequiredArgsConstructor;
-import ru.practicum.user.UserRepository;
 import org.springframework.stereotype.Service;
 import ru.practicum.exeptions.NotFoundException;
 import ru.practicum.exeptions.DuplicateException;
+import ru.practicum.user.repository.UserRepository;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
@@ -18,9 +18,7 @@ import java.util.Arrays;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
-    /**
-     * Основные методы API.
-     */
+    // Основные методы API:
 
     // Добавление нового пользователя.
     @Override
@@ -89,9 +87,7 @@ public class UserServiceImpl implements UserService {
         log.info("UserController - удалён пользователь с ИД: {}", userId);
     }
 
-    /**
-     * Вспомогательные методы.
-     */
+    // Вспомогательные методы:
 
     // Получение пользователя, если не найден - ошибка 404.
     @Override

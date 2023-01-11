@@ -5,10 +5,7 @@ import ru.practicum.category.model.*;
 import java.util.List;
 
 public interface CategoryService {
-
-    /**
-     * Основные методы API.
-     */
+    // Основные методы API:
 
     // Добавление новой категории.
     CategoryDto addCategory(CategoryNewDto categoryDto);
@@ -25,9 +22,7 @@ public interface CategoryService {
     // Удаление категории.
     void deleteCategory(Long categoryId);
 
-    /**
-     * Вспомогательные методы.
-     */
+    // Вспомогательные методы:
 
     // Получение категории, если не найден - ошибка 404.
     Category getCategoryOrNotFound(Long categoryId);

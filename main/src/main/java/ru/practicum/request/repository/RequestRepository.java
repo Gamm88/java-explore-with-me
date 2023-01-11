@@ -1,4 +1,4 @@
-package ru.practicum.request;
+package ru.practicum.request.repository;
 
 import ru.practicum.request.model.Request;
 import org.springframework.data.jpa.repository.JpaRepository;

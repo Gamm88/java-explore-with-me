@@ -5,10 +5,7 @@ import ru.practicum.request.model.*;
 import java.util.List;
 
 public interface RequestService {
-
-    /**
-     * Основные методы API.
-     */
+    // Основные методы API:
 
     // Добавление нового запроса пользователя на участие в мероприятии.
     RequestDto addRequest(Long userId, Long eventId);
@@ -19,9 +16,7 @@ public interface RequestService {
     // Отмена запроса пользователя на участие в мероприятии.
     RequestDto canceledRequest(Long userId, Long requestId);
 
-    /**
-     * Вспомогательные методы.
-     */
+    // Вспомогательные методы:
 
     // Получение запроса, если не найден - ошибка 404.
     Request getRequestOrNotFound(Long requestId);

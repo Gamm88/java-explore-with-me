@@ -7,9 +7,9 @@ import lombok.RequiredArgsConstructor;
 import ru.practicum.event.model.event.Event;
 import ru.practicum.user.service.UserService;
 import org.springframework.stereotype.Service;
-import ru.practicum.comment.CommentRepository;
 import ru.practicum.event.service.EventService;
 import ru.practicum.exeptions.NotFoundException;
+import ru.practicum.comment.repository.CommentRepository;
 
 import java.util.List;
 
@@ -21,9 +21,7 @@ public class CommentServiceImpl implements CommentService {
     private final EventService eventService;
     private final CommentRepository commentRepository;
 
-    /**
-     * Приватные сервисы, только для пользователей прошедших авторизацию.
-     */
+    // Приватные сервисы, только для пользователей прошедших авторизацию:
 
     // Добавление нового комментария.
     @Override
@@ -55,9 +53,7 @@ public class CommentServiceImpl implements CommentService {
         log.info("CommentService - удалён комментарий c ИД: {}.", commentId);
     }
 
-    /**
-     * Административные сервисы, только для администраторов.
-     */
+    // Административные сервисы, только для администраторов:
 
     // Получение всех комментариев пользователя.
     @Override
@@ -91,9 +87,7 @@ public class CommentServiceImpl implements CommentService {
         return CommentMapper.mapToCommentDto(comment);
     }
 
-    /**
-     * Вспомогательные методы.
-     */
+    // Вспомогательные методы:
 
     // Получение комментария, если не найдена - ошибка 404.
     private Comment getCommentOrNotFound(Long commentId) {

@@ -1,4 +1,4 @@
-package ru.practicum.category;
+package ru.practicum.category.repository;
 
 import ru.practicum.category.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;

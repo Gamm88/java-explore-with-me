@@ -6,18 +6,18 @@ import ru.practicum.user.model.User;
 import lombok.RequiredArgsConstructor;
 import ru.practicum.event.model.event.*;
 import ru.practicum.components.HttpClient;
-import ru.practicum.event.EventRepository;
 import ru.practicum.components.DateUtility;
 import org.springframework.data.domain.Sort;
 import ru.practicum.category.model.Category;
 import ru.practicum.user.service.UserService;
-import ru.practicum.request.RequestRepository;
 import org.springframework.stereotype.Service;
 import ru.practicum.exeptions.NotFoundException;
 import ru.practicum.exeptions.ValidatorExceptions;
 import org.springframework.data.domain.PageRequest;
 import ru.practicum.request.service.RequestService;
 import ru.practicum.category.service.CategoryService;
+import ru.practicum.event.repository.EventRepository;
+import ru.practicum.request.repository.RequestRepository;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
@@ -37,9 +37,7 @@ public class EventServiceImpl implements EventService {
     private final CategoryService categoryService;
     private final RequestRepository requestRepository;
 
-    /**
-     * Публичные методы API, в выдаче должны быть только опубликованные мероприятия.
-     */
+    // Публичные методы API, в выдаче должны быть только опубликованные мероприятия:
 
     // Поиск краткой информации о мероприятиях, по параметрам поиска.
     @Override
@@ -82,9 +80,7 @@ public class EventServiceImpl implements EventService {
         return eventFullDto;
     }
 
-    /**
-     * Приватные методы API, только для пользователей прошедших авторизацию.
-     */
+    // Приватные методы API, только для пользователей прошедших авторизацию:
 
     // Добавление нового мероприятия.
     @Override
@@ -197,9 +193,7 @@ public class EventServiceImpl implements EventService {
         return RequestMapper.mapToRequestDto(request);
     }
 
-    /**
-     * Административные методы, только для администраторов сервиса
-     */
+    // Административные методы API, только для администраторов сервиса:
 
     // Поиск полной информации о мероприятиях, по параметрам поиска.
     @Override
@@ -250,9 +244,7 @@ public class EventServiceImpl implements EventService {
         return EventMapper.mapToEventFullDto(event);
     }
 
-    /**
-     * Вспомогательные методы.
-     */
+    // Вспомогательные методы:
 
     // Получение мероприятие, если не найдено - ошибка 404.
     @Override

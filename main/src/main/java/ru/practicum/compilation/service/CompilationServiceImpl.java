@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import ru.practicum.event.service.EventService;
 import ru.practicum.exeptions.NotFoundException;
 import org.springframework.data.domain.PageRequest;
-import ru.practicum.compilation.CompilationRepository;
+import ru.practicum.compilation.repository.CompilationRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -20,9 +20,7 @@ public class CompilationServiceImpl implements CompilationService {
     private final EventService eventService;
     private final CompilationRepository compilationRepository;
 
-    /**
-     * Публичные методы API, для всех пользователей.
-     */
+    // Публичные методы API, для всех пользователей:
 
     // Получение подборок.
     @Override
@@ -43,9 +41,7 @@ public class CompilationServiceImpl implements CompilationService {
         return CompilationMapper.mapToCompilationDto(compilation);
     }
 
-    /**
-     * Административные методы API, только для администраторов.
-     */
+    // Административные методы API, только для администраторов:
 
     // Добавление новой подборки.
     @Override
@@ -100,9 +96,7 @@ public class CompilationServiceImpl implements CompilationService {
         }
     }
 
-    /**
-     * Вспомогательные методы.
-     */
+    // Вспомогательные методы:
 
     // Получение подборки, если не найдена - ошибка 404.
     private Compilation getCompilationOrNotFound(Long compId) {

@@ -6,10 +6,7 @@ import ru.practicum.compilation.model.CompilationNewDto;
 import java.util.List;
 
 public interface CompilationService {
-
-    /**
-     * Публичные методы API, для всех пользователей.
-     */
+    // Публичные методы API, для всех пользователей:
 
     // Получение подборок.
     List<CompilationDto> getCompilations(boolean pinned, int from, int size);
@@ -17,9 +14,7 @@ public interface CompilationService {
     // Получение подборки по ИД.
     CompilationDto getCompilationById(Long compId);
 
-    /**
-     * Административные методы API, только для администраторов.
-     */
+    // Административные методы API, только для администраторов:
 
     // Добавление новой подборки.
     CompilationDto addCompilation(CompilationNewDto compilationNewDto);

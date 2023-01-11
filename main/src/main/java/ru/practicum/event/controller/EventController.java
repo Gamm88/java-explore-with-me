@@ -1,4 +1,4 @@
-package ru.practicum.event;
+package ru.practicum.event.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
@@ -19,9 +19,7 @@ import javax.validation.constraints.PositiveOrZero;
 public class EventController {
     private final EventService eventService;
 
-    /**
-     * Публичные эндпоинты, в выдаче должны быть только опубликованные мероприятия.
-     */
+    // Публичные эндпоинты, в выдаче должны быть только опубликованные мероприятия:
 
     // Поиск всех мероприятий, со следующими параметрами:
     // text string - текст для поиска в содержимом аннотации и подробном описании мероприятия;
@@ -53,9 +51,7 @@ public class EventController {
         return eventService.getEventPublic(eventId, request);
     }
 
-    /**
-     * Приватные эндпоинты, только для пользователей прошедших авторизацию.
-     */
+    // Приватные эндпоинты, только для пользователей прошедших авторизацию:
 
     // Добавление нового мероприятия.
     @PostMapping("/users/{userId}/events")
@@ -134,9 +130,7 @@ public class EventController {
         return eventService.changeRequestStatusUser(userId, eventId, reqId, false);
     }
 
-    /**
-     * Административные эндпоинты, только для администраторов сервиса.
-     */
+    // Административные эндпоинты, только для администраторов сервиса:
 
     // Эндпоинт возвращает полную информацию обо всех мероприятиях подходящих под переданные условия:
     // users array - список id пользователей, чьи мероприятия нужно найти;

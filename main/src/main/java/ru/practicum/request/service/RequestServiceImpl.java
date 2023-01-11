@@ -7,7 +7,7 @@ import ru.practicum.user.model.User;
 import ru.practicum.event.model.event.State;
 import ru.practicum.event.model.event.Event;
 import ru.practicum.user.service.UserService;
-import ru.practicum.request.RequestRepository;
+import ru.practicum.request.repository.RequestRepository;
 import org.springframework.stereotype.Service;
 import ru.practicum.event.service.EventService;
 import ru.practicum.exeptions.NotFoundException;
@@ -25,9 +25,7 @@ public class RequestServiceImpl implements RequestService {
     private final EventService eventService;
     private final RequestRepository requestRepository;
 
-    /**
-     * Основные методы API.
-     */
+    // Основные методы API:
 
     // Добавление нового запроса пользователя на участие в мероприятии.
     @Override
@@ -92,9 +90,7 @@ public class RequestServiceImpl implements RequestService {
         return RequestMapper.mapToRequestDto(request);
     }
 
-    /**
-     * Вспомогательные методы.
-     */
+    // Вспомогательные методы:
 
     // Получение запроса, если не найден - ошибка 404.
     @Override

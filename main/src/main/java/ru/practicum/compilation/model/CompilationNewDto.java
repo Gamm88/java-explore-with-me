@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 public class CompilationNewDto {
     // Заголовок подборки.
     @NotBlank(message = "Заголовок подборки не может быть пустым!")
-    @Size(max = 128, message = "Максимальная длина заголовка подборки — 128 символов!")
+    @Size(max = 120, message = "Максимальная длина заголовка подборки — 120 символов!")
     private String title;
 
     // Закреплена ли подборка на главной странице сайта (по умолчанию - false).

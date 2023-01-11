@@ -4,10 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import ru.practicum.category.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.practicum.category.CategoryRepository;
 import ru.practicum.exeptions.NotFoundException;
 import ru.practicum.exeptions.DuplicateException;
 import org.springframework.data.domain.PageRequest;
+import ru.practicum.category.repository.CategoryRepository;
 
 import java.util.List;
 import java.util.Arrays;
@@ -18,9 +18,7 @@ import java.util.Arrays;
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
-    /**
-     * Основные методы API.
-     */
+    // Основные методы API:
 
     // Добавление новой категории.
     @Override
@@ -80,9 +78,7 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.deleteById(categoryId);
     }
 
-    /**
-     * Вспомогательные методы.
-     */
+    // Вспомогательные методы:
 
     // Получение категории, если не найден - ошибка 404.
     @Override

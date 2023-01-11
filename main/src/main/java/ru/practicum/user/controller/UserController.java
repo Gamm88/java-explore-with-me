@@ -1,4 +1,4 @@
-package ru.practicum.user;
+package ru.practicum.user.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
@@ -55,6 +55,7 @@ public class UserController {
 
     // Удаление пользователя.
     @DeleteMapping("/{userId}")
+    @ResponseBody
     public String deleteUser(@PathVariable("userId") Long userId) {
         log.info("UserController - удаление пользователя с ИД: {}.", userId);
         userService.deleteUser(userId);
