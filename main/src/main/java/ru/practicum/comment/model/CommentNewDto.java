@@ -5,10 +5,11 @@ import lombok.*;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotBlank;
 
-@Data
-@Builder
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder(toBuilder = true)
 public class CommentNewDto {
     // Текст комментария.
     @NotBlank(message = "Комментарий не может быть пустым!")

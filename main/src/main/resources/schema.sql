@@ -71,10 +71,11 @@ CREATE TABLE IF NOT EXISTS compilations_events
 
 CREATE TABLE IF NOT EXISTS comments
 (
-    id       BIGINT,
-    text     VARCHAR(4000),
-    user_id  BIGINT,
-    event_id BIGINT,
+    id         BIGINT,
+    text       VARCHAR(4000),
+    user_id    BIGINT,
+    event_id   BIGINT,
+    created_on TIMESTAMP WITHOUT TIME ZONE,
     CONSTRAINT pk_comments PRIMARY KEY (id),
     CONSTRAINT fk_comments_event FOREIGN KEY (event_id) REFERENCES events (id),
     CONSTRAINT fk_comments_user FOREIGN KEY (user_id) REFERENCES users (id)

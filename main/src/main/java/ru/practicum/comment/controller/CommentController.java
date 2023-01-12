@@ -16,6 +16,24 @@ import javax.validation.constraints.Positive;
 public class CommentController {
     private final CommentService commentService;
 
+    // Публичные эндпоинты
+
+    // Получение комментария по ИД.
+    @GetMapping("comments/{commentId}")
+    public CommentDto getComment(@PathVariable Long commentId) {
+        log.info("CommentService - получение комментария с ИД: {}.", commentId);
+
+        return commentService.getComment(commentId);
+    }
+
+    // Получение всех комментариев мероприятия.
+    @GetMapping("comments/events/{eventId}")
+    public List<CommentDto> getAllCommentsByEventId(@PathVariable Long eventId) {
+        log.info("CommentService - получение всех комментариев мероприятия с ИД: {}.", eventId);
+
+        return commentService.getAllCommentsByEventId(eventId);
+    }
+
     // Приватные эндпоинты, только для пользователей прошедших авторизацию:
 
     // Добавление нового комментария.
@@ -28,12 +46,22 @@ public class CommentController {
         return commentService.addComment(userId, eventId, commentNewDto);
     }
 
-    // Получение комментария по ИД.
-    @GetMapping("comments/{commentId}")
-    public CommentDto getComment(@PathVariable Long commentId) {
-        log.info("CommentService - получение комментария с ИД: {}.", commentId);
+    // Получение всех комментариев пользователя.
+    @GetMapping("comments/users/{userId}")
+    public List<CommentDto> getAllCommentsByUserId(@PathVariable Long userId) {
+        log.info("CommentService - получение всех комментариев пользователя с ИД: {}.", userId);
 
-        return commentService.getComment(commentId);
+        return commentService.getAllCommentsByUserId(userId);
+    }
+
+    // Редактирование комментария.
+    @PatchMapping("/admin/comments/{userId}/{commentId}")
+    public CommentDto updateComment(@PathVariable Long userId,
+                                    @PathVariable Long commentId,
+                                    @RequestBody @Valid CommentNewDto commentNewDto) {
+        log.info("CommentService - редактирование комментария с ИД: {}, новый текст : {}. ", commentId, commentNewDto);
+
+        return commentService.updateComment(userId, commentId, commentNewDto);
     }
 
     // Удаление комментария.
@@ -45,33 +73,5 @@ public class CommentController {
         commentService.deleteComment(userId, commentId);
 
         return "Комментарий удалён.";
-    }
-
-    // Административные эндпоинты, только для администраторов:
-
-    // Получение всех комментариев пользователя.
-    @GetMapping("/admin/comments/users/{userId}")
-    public List<CommentDto> getAllCommentsByUserId(@PathVariable Long userId) {
-        log.info("CommentService - получение всех комментариев пользователя с ИД: {}.", userId);
-
-        return commentService.getAllCommentsByUserId(userId);
-    }
-
-    // Получение всех комментариев события.
-    @GetMapping("/admin/comments/events/{eventId}")
-    public List<CommentDto> getAllCommentsByEventId(@PathVariable Long eventId) {
-        log.info("CommentService - получение всех комментариев мероприятия с ИД: {}.", eventId);
-
-        return commentService.getAllCommentsByEventId(eventId);
-    }
-
-    // Редактирование комментария.
-    @PatchMapping("/admin/comments/{userId}/{commentId}")
-    public CommentDto updateComment(@PathVariable Long userId,
-                                    @PathVariable Long commentId,
-                                    @RequestBody @Valid CommentNewDto commentNewDto) {
-        log.info("CommentService - редактирование комментария с ИД: {}, новый текст : {}. ", commentId, commentNewDto);
-
-        return commentService.updateComment(userId, commentId, commentNewDto);
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import ru.practicum.event.service.EventService;
 import ru.practicum.exeptions.NotFoundException;
 import ru.practicum.comment.repository.CommentRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +21,27 @@ public class CommentServiceImpl implements CommentService {
     private final UserService userService;
     private final EventService eventService;
     private final CommentRepository commentRepository;
+
+    // Публичные эндпоинты
+
+    // Получение комментария по ИД.
+    @Override
+    public CommentDto getComment(Long commentId) {
+        Comment comment = getCommentOrNotFound(commentId);
+        log.info("CommentService - предоставлен комментарий: {}.", comment);
+
+        return CommentMapper.mapToCommentDto(comment);
+    }
+
+    // Получение всех комментариев мероприятия.
+    @Override
+    public List<CommentDto> getAllCommentsByEventId(Long eventId) {
+        eventService.getEventOrNotFound(eventId);
+        List<Comment> comments = commentRepository.getAllCommentsByEventId(eventId);
+        log.info("CommentService - предоставлены комментарии: {}.", comments);
+
+        return CommentMapper.mapToCommentDto(comments);
+    }
 
     // Приватные сервисы, только для пользователей прошедших авторизацию:
 
@@ -35,26 +57,6 @@ public class CommentServiceImpl implements CommentService {
         return CommentMapper.mapToCommentDto(comment);
     }
 
-    // Получение комментария по ИД.
-    @Override
-    public CommentDto getComment(Long commentId) {
-        Comment comment = getCommentOrNotFound(commentId);
-        log.info("CommentService - предоставлен комментарий: {}.", comment);
-
-        return CommentMapper.mapToCommentDto(comment);
-    }
-
-    // Удаление комментария.
-    @Override
-    public void deleteComment(Long userId, Long commentId) {
-        userService.getUserOrNotFound(userId);
-        getCommentOrNotFound(commentId);
-        commentRepository.deleteById(commentId);
-        log.info("CommentService - удалён комментарий c ИД: {}.", commentId);
-    }
-
-    // Административные сервисы, только для администраторов:
-
     // Получение всех комментариев пользователя.
     @Override
     public List<CommentDto> getAllCommentsByUserId(Long userId) {
@@ -65,18 +67,9 @@ public class CommentServiceImpl implements CommentService {
         return CommentMapper.mapToCommentDto(comments);
     }
 
-    // Получение всех комментариев события.
-    @Override
-    public List<CommentDto> getAllCommentsByEventId(Long eventId) {
-        eventService.getEventOrNotFound(eventId);
-        List<Comment> comments = commentRepository.getAllCommentsByEventId(eventId);
-        log.info("CommentService - предоставлены комментарии: {}.", comments);
-
-        return CommentMapper.mapToCommentDto(comments);
-    }
-
     // Редактирование комментария.
     @Override
+    @Transactional
     public CommentDto updateComment(Long userId, Long commentId, CommentNewDto commentNewDto) {
         userService.getUserOrNotFound(userId);
         Comment comment = getCommentOrNotFound(commentId);
@@ -85,6 +78,16 @@ public class CommentServiceImpl implements CommentService {
         log.info("CommentService - изменён текст комментария: {}.", comment);
 
         return CommentMapper.mapToCommentDto(comment);
+    }
+
+    // Удаление комментария.
+    @Override
+    @Transactional
+    public void deleteComment(Long userId, Long commentId) {
+        userService.getUserOrNotFound(userId);
+        getCommentOrNotFound(commentId);
+        commentRepository.deleteById(commentId);
+        log.info("CommentService - удалён комментарий c ИД: {}.", commentId);
     }
 
     // Вспомогательные методы:

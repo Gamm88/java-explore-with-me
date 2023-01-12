@@ -5,6 +5,7 @@ import ru.practicum.user.model.User;
 import ru.practicum.event.model.event.Event;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -33,4 +34,8 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "event_id", referencedColumnName = "id")
     private Event event;
+
+    // Дата и время создания комментария (в формате "yyyy-MM-dd HH:mm:ss").
+    @Column(name = "created_on")
+    private LocalDateTime createdOn;
 }
