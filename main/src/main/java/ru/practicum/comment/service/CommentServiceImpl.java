@@ -22,7 +22,7 @@ public class CommentServiceImpl implements CommentService {
     private final EventService eventService;
     private final CommentRepository commentRepository;
 
-    // Публичные эндпоинты
+    // Публичные эндпоинты:
 
     // Получение комментария по ИД.
     @Override
