@@ -210,7 +210,7 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Test create item\", function () {\r",
+									"pm.test(\"Тест создания комментария\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
 									"    pm.expect(jsonData.text).to.eql('Комментарий к мероприятию');\r",
 									"});"
@@ -291,7 +291,7 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Test create item\", function () {\r",
+									"pm.test(\"Тест создания комментария\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
 									"    pm.expect(jsonData.text).to.eql('Второй комментарий мероприятию');\r",
 									"});"
@@ -383,14 +383,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/comments/users/:userId",
+							"raw": "{{baseUrl}}/users/:userId/comments",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"comments",
 								"users",
-								":userId"
+								":userId",
+								"comments"
 							],
 							"variable": [
 								{
@@ -480,7 +480,7 @@
 									"    pm.response.to.be.json;\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Test create item\", function () {\r",
+									"pm.test(\"Тест редактирования комментария\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
 									"    pm.expect(jsonData.text).to.eql('Обновлённый комменатрий');\r",
 									"});"
@@ -511,7 +511,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/users/:userId/comments/events/:commentId",
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -519,7 +519,6 @@
 								"users",
 								":userId",
 								"comments",
-								"events",
 								":commentId"
 							],
 							"variable": [
@@ -559,7 +558,7 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Test create item\", function () {\r",
+									"pm.test(\"Тест получения обновлённого комментария\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
 									"    pm.expect(jsonData.text).to.eql('Обновлённый комменатрий');\r",
 									"});"
@@ -643,7 +642,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/users/:userId/comments/events/:commentId",
+							"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -651,7 +650,6 @@
 								"users",
 								":userId",
 								"comments",
-								"events",
 								":commentId"
 							],
 							"variable": [
@@ -663,7 +661,7 @@
 								{
 									"key": "commentId",
 									"value": "2",
-									"description": "ИД комментария"
+									"description": "ИД мероприятия"
 								}
 							]
 						},
