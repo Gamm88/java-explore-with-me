@@ -47,7 +47,7 @@ public class CommentController {
     }
 
     // Получение всех комментариев пользователя.
-    @GetMapping("comments/users/{userId}")
+    @GetMapping("/users/{userId}/comments")
     public List<CommentDto> getAllCommentsByUserId(@PathVariable Long userId) {
         log.info("CommentService - получение всех комментариев пользователя с ИД: {}.", userId);
 
@@ -55,7 +55,7 @@ public class CommentController {
     }
 
     // Редактирование комментария.
-    @PatchMapping("/admin/comments/{userId}/{commentId}")
+    @PatchMapping("/users/{userId}/comments/{commentId}")
     public CommentDto updateComment(@PathVariable Long userId,
                                     @PathVariable Long commentId,
                                     @RequestBody @Valid CommentNewDto commentNewDto) {
