@@ -25,4 +25,15 @@ public class User {
     // Электронная почта пользователя.
     @Column(unique = true)
     private String email;
+
+    // Рейтинг пользователя (по кол-ву комментариев).
+    private Ranking rank;
+
+    // Количество оставленных комментариев.
+    @Column(name = "comments_left")
+    private Integer commentsLeft;
+
+    // Бан на комментарии.
+    @Column(name = "comments_ban")
+    private boolean commentsBan;
 }
