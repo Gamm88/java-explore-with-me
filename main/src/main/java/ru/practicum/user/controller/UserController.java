@@ -76,7 +76,7 @@ public class UserController {
     }
 
     // Снятие запрета на комментирование
-    @PatchMapping("/{userId}/ban")
+    @PatchMapping("/{userId}/unban")
     @ResponseBody
     public String unBanCommentsForUser(@PathVariable("userId") Long userId) {
         log.info("UserController - снят запрет на комментирование для пользователя с ИД: {}.", userId);

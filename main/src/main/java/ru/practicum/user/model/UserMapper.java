@@ -10,6 +10,9 @@ public class UserMapper {
                 .id(userDto.getId())
                 .name(userDto.getName())
                 .email(userDto.getEmail())
+                .rank(userDto.getRank())
+                .commentsLeft(userDto.getCommentsLeft())
+                .commentsBan(userDto.isCommentsBan())
                 .build();
     }
 
@@ -19,6 +22,9 @@ public class UserMapper {
                 .id(user.getId())
                 .name(user.getName())
                 .email(user.getEmail())
+                .rank(user.getRank())
+                .commentsLeft(user.getCommentsLeft())
+                .commentsBan(user.isCommentsBan())
                 .build();
     }
 
