@@ -26,5 +26,9 @@ public interface CommentService {
     CommentDto updateComment(Long userId, Long commentId, CommentNewDto commentNewDto);
 
     // Удаление комментария.
-    void deleteComment(Long userId, Long commentId);
+    void userDeleteComment(Long userId, Long commentId);
+
+    // Административные сервисы, только для администраторов:
+    // Удаление комментария.
+    void adminDeleteComment(Long commentId);
 }

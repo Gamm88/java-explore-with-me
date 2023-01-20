@@ -62,4 +62,26 @@ public class UserController {
 
         return "Пользователь удалён.";
     }
+
+    // Административные эндпоинты, только для администраторов сервиса:
+
+    // Запрет на комментирование
+    @PatchMapping("/{userId}/ban")
+    @ResponseBody
+    public String banCommentsForUser(@PathVariable("userId") Long userId) {
+        log.info("UserController - запрет на комментирование для пользователя с ИД: {}.", userId);
+        userService.banOrUnbanCommentsForUser(userId, true);
+
+        return "Пользователь удалён.";
+    }
+
+    // Снятие запрета на комментирование
+    @PatchMapping("/{userId}/ban")
+    @ResponseBody
+    public String unBanCommentsForUser(@PathVariable("userId") Long userId) {
+        log.info("UserController - снят запрет на комментирование для пользователя с ИД: {}.", userId);
+        userService.banOrUnbanCommentsForUser(userId, false);
+
+        return "Пользователь удалён.";
+    }
 }

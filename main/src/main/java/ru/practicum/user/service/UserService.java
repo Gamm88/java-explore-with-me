@@ -22,6 +22,11 @@ public interface UserService {
     // Удаление пользователя.
     void deleteUser(Long userId);
 
+    // Административные эндпоинты, только для администраторов сервиса:
+
+    // Установка или снятие запрета на комментирование.
+    void banOrUnbanCommentsForUser(Long userId, boolean ban);
+
     // Вспомогательные методы:
 
     // Получение пользователя, если не найден - ошибка 404.

@@ -84,7 +84,25 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long userId) {
         getUserOrNotFound(userId);
         userRepository.deleteById(userId);
-        log.info("UserController - удалён пользователь с ИД: {}", userId);
+        log.info("UserService - удалён пользователь с ИД: {}", userId);
+    }
+
+    // Административные эндпоинты, только для администраторов сервиса:
+
+    // Установка или снятие запрета на комментирование.
+    @Override
+    public void banOrUnbanCommentsForUser(Long userId, boolean ban) {
+        User user = getUserOrNotFound(userId);
+
+        if (ban) {
+            user.setCommentsBan(true);
+            userRepository.save(user);
+            log.info("UserService - установлен запрет на комментарии для пользователя: {}", user);
+        } else {
+            user.setCommentsBan(false);
+            userRepository.save(user);
+            log.info("UserService - снят запрет на комментарии для пользователя: {}", user);
+        }
     }
 
     // Вспомогательные методы:

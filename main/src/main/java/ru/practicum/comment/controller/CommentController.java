@@ -67,10 +67,22 @@ public class CommentController {
     // Удаление комментария.
     @DeleteMapping("/users/{userId}/comments/{commentId}")
     @ResponseBody
-    public String deleteComment(@PathVariable Long userId,
-                                @PathVariable Long commentId) {
+    public String userDeleteComment(@PathVariable Long userId,
+                                    @PathVariable Long commentId) {
         log.info("CommentService - удаление комментария с ИД: {}.", commentId);
-        commentService.deleteComment(userId, commentId);
+        commentService.userDeleteComment(userId, commentId);
+
+        return "Комментарий удалён.";
+    }
+
+    // Административные эндпоинты, только для администраторов сервиса:
+
+    // Удаление комментария администратором.
+    @DeleteMapping("/admin/comments/{commentId}")
+    @ResponseBody
+    public String adminDeleteComment(@PathVariable Long commentId) {
+        log.info("CommentService - удаление комментария с ИД: {}.", commentId);
+        commentService.adminDeleteComment(commentId);
 
         return "Комментарий удалён.";
     }
